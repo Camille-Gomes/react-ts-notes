@@ -1,11 +1,20 @@
 import * as React from "react";
-import { Form, Button } from "react-bootstrap";
+import Button from "react-bootstrap/button";
+import { Form } from "react-bootstrap";
+import { Note } from "../models/note.model";
 
-export interface ICreateNotesProps {}
+interface ICreateNotesProps {
+    notes: Note[];
+    setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+}
 
-const CreateNotes: React.FunctionComponent<ICreateNotesProps> = (props) => {
+const CreateNotes: React.FunctionComponent<ICreateNotesProps> = () => {
+    const titleRef = React.useRef<HTMLInputElement | null>(null);
+    const textRef = React.useRef<HTMLTextAreaElement | null>(null);
+    const colorRef = React.useRef<HTMLInputElement | null>(null);
+
     return (
-        <>
+        <div>
             <h2>Créer une note</h2>
             <Form className="mt-3 mb-3">
                 <Form.Group className="mb-3" controlId="formBasicTitle">
@@ -13,9 +22,8 @@ const CreateNotes: React.FunctionComponent<ICreateNotesProps> = (props) => {
                     <Form.Control
                         type="text"
                         placeholder="Entrer le titre de la note"
-                    >
-                        Titre
-                    </Form.Control>
+                        ref={titleRef}
+                    ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicText">
                     <Form.Label>Note</Form.Label>
@@ -23,9 +31,8 @@ const CreateNotes: React.FunctionComponent<ICreateNotesProps> = (props) => {
                         placeholder="Entrer votre note"
                         as="textarea"
                         rows={3}
-                    >
-                        Titre
-                    </Form.Control>
+                        ref={textRef}
+                    ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicTitle">
                     <Form.Label htmlFor="colorInput">
@@ -36,15 +43,14 @@ const CreateNotes: React.FunctionComponent<ICreateNotesProps> = (props) => {
                         id="colorInput"
                         defaultValue="#dfdfdf"
                         title="Choissisez votre couleur"
-                    >
-                        Titre
-                    </Form.Control>
+                        ref={colorRef}
+                    ></Form.Control>
                 </Form.Group>
                 <Button type="submit" variant="primary">
                     Ajouter une note
                 </Button>
             </Form>
-        </>
+        </div>
     );
 };
 
