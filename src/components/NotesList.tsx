@@ -2,7 +2,7 @@ import * as React from "react";
 import { Note } from "../models/note.model";
 import Notes from "./Notes";
 
-export interface INotesListProps {
+interface INotesListProps {
     notes: Note[];
     setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
 }
